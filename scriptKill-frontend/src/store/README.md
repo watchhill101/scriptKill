@@ -1,0 +1,1 @@
+此文件夹用于存放应用的状态管理逻辑, 例如 Redux 的 reducers, actions, 和 store 配置。
