@@ -1,0 +1,58 @@
+.login-mobile-bg {
+  min-height: 100vh;
+   width: 100vw; 
+  background: linear-gradient(135deg, #f7f8fa 60%, #b3c6e0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-mobile-container {
+  width: 90vw;
+  max-width: 400px;
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  padding: 32px 20px 24px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-mobile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.login-mobile-illustration {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.login-mobile-welcome {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #222;
+  margin-bottom: 4px;
+}
+
+.login-mobile-desc {
+  font-size: 1rem;
+  color: #888;
+  margin-bottom: 8px;
+}
+
+.login-input {
+  margin-bottom: 18px;
+  width: 100%;
+}
+
+.login-btn {
+  width: 100%;
+  margin-bottom: 12px;
+}

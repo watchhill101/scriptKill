@@ -1,0 +1,43 @@
+
+.home-container {
+  min-height: 100vh;
+  height: 100vh;
+  width: 100vw;         /* 新增：宽度占满整个视口 */
+  box-sizing: border-box;
+  background: #f7f8fa;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0 12px;
+}
+
+
+.home-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 24px;
+  color: #222;
+}
+
+.shop-list {
+  margin-top: 16px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  padding: 8px 0;
+  width: 100%;
+  max-width: 400px;
+}
+
+.get-shop-btn {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+}
+
+.login-btn {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 32px;
+}
