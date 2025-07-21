@@ -10,30 +10,6 @@ const {
   ScriptRoleModel, //角色
   PersonalCenterModel, //个人中心
 } = require("../module/index");
-
-/* GET home page. */
-router.get("/", function (req, res, next) {
-  res.render("index", { title: "Express" });
-});
-//登录
-router.post("/user", (req, res) => {
-  const { name, phone } = req.body;
-  try {
-    UserModel.find({ name, phone }).then((data) => {
-      res.json({
-        code: 200,
-        msg: "登录成功",
-        data: data[0]._id,
-      });
-    });
-  } catch (err) {
-    res.json({
-      code: 500,
-      msg: "登录失败",
-      data: err,
-    });
-  }
-});
 //获取剧本
 router.get("/script", (req, res) => {
   ScriptModel.find().then((data) => {
