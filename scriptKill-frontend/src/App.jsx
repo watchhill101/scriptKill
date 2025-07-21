@@ -1,8 +1,7 @@
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import RankingPage from './pages/RankingPage';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
+import Login from './pages/login';
+import Register from './pages/register';
 import './App.css';
 
 function App() {
@@ -11,10 +10,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* 默认路由重定向到排行榜页面 */}
-        <Route path="/" element={<Navigate to="/ranking" replace />} />
-        {/* 排行榜页面路由 */}
-        <Route path="/ranking" element={<RankingPage />} />
+        <Route path="/login" element={<Login />} />
+        {/* 新增：访问 / 时自动跳转到 /login */}
+        <Route path="/register" element={<Register />} />
+        <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
   );
