@@ -1,0 +1,118 @@
+.register-bg {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(120deg, #a18cd1 0%, #fbc2eb 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.register-bg::before,
+.register-bg::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+  z-index: 1;
+}
+.register-bg::before {
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+  left: -120px;
+  top: -100px;
+}
+.register-bg::after {
+  width: 350px;
+  height: 350px;
+  background: linear-gradient(135deg, #fad0c4 0%, #ffd1ff 100%);
+  right: -100px;
+  bottom: -80px;
+}
+
+.register-container {
+  position: relative;
+  z-index: 2;
+  width: 92vw;
+  max-width: 400px;
+  background: rgba(255,255,255,0.25);
+  border-radius: 22px;
+  box-shadow: 0 8px 32px 0 rgba(31,38,135,0.18);
+  backdrop-filter: blur(16px);
+  padding: 38px 22px 28px 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1.5px solid rgba(255,255,255,0.25);
+}
+
+.register-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 28px;
+}
+
+.register-illustration {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 12px;
+  border-radius: 18px;
+  object-fit: cover;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+}
+
+.register-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 8px #fff8;
+}
+
+.register-desc {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 8px;
+  text-shadow: 0 1px 4px #fff6;
+}
+
+.register-input {
+  margin-bottom: 18px;
+  width: 100%;
+  background: rgba(255,255,255,0.7);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(160,160,255,0.08);
+  border: 1.5px solid #e0e7ff;
+  font-size: 1.1rem;
+  padding: 0 8px;
+}
+
+.register-btn {
+  width: 100%;
+  margin-bottom: 14px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #a18cd1 0%, #fbc2eb 100%);
+  color: #fff;
+  border: none;
+  box-shadow: 0 2px 8px rgba(160,160,255,0.12);
+  transition: background 0.3s, box-shadow 0.3s;
+}
+.register-btn:active {
+  background: linear-gradient(90deg, #fbc2eb 0%, #a18cd1 100%);
+  box-shadow: 0 4px 16px rgba(160,160,255,0.18);
+}
+
+@media (max-width: 480px) {
+  .register-container {
+    padding: 22px 6vw 18px 6vw;
+  }
+  .register-header {
+    margin-bottom: 18px;
+  }
+}
