@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import RankingPage from './pages/RankingPage';
@@ -7,8 +8,13 @@ import './App.css';
 
 function App() {
   const [count, setCount] = useState(0);
+=======
+import Home from "./pages/homePage/home.jsx";
+>>>>>>> Stashed changes
 
+const App = () => {
   return (
+<<<<<<< Updated upstream
     <Router>
       <Routes>
         {/* 默认路由重定向到排行榜页面 */}
@@ -19,5 +25,12 @@ function App() {
     </Router>
   );
 }
+=======
+    <>
+      <Home />
+    </>
+  );
+};
+>>>>>>> Stashed changes
 
 export default App;
