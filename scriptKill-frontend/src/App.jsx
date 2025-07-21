@@ -1,12 +1,20 @@
 import React from 'react'
 import './App.css'
-import CouponPage from './pages/you_X/you_X'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import FundDetailDebit from './pages/you_X/FundDetailDebit'
+import FundDetailRecharge from './pages/you_X/FundDetailRecharge'
+import CouponList from './pages/you_X/CouponList';
 
 function App() {
   return (
-    <div className="App">
-      <CouponPage />
-    </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/coupon-list" element={<CouponList />} />
+          <Route path="/debit" element={<FundDetailDebit />} />
+          <Route path="/recharge" element={<FundDetailRecharge />} />
+          <Route path="*" element={<Navigate to="/coupon-list" replace />} />
+        </Routes>
+      </BrowserRouter>
   )
 }
 
