@@ -7,6 +7,8 @@ const { TypeModel } = require("./type");
 const { ReservationModel } = require("./reservation");
 const { ScriptRoleModel } = require("./scriptRole");
 const { PersonalCenterModel } = require("./personalCenter");
+const { CouponModel } = require("./Coupon");
+const { BalanceModel } = require("./balance");
 
 db.connect("mongodb://127.0.0.1:27017/scriptKill")
   .then(() => {
@@ -25,4 +27,6 @@ module.exports = {
   ReservationModel,
   ScriptRoleModel,
   PersonalCenterModel,
+  CouponModel,
+  BalanceModel,
 };

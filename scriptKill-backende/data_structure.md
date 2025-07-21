@@ -12,7 +12,9 @@
 - [6. DM (主持人) (`dm.js`)](#6-dm-主持人-dmjs)
 - [7. 预约/订单 (`reservation.js`)](#7-预约订单-reservationjs)
 - [8. 个人中心 (`personalCenter.js`)](#8-个人中心-personalcenterjs)
-- [9. 数据库连接 (`index.js`)](#9-数据库连接-indexjs)
+- [9. 优惠券 (`coupon.js`)](#9-优惠券-couponjs)
+- [10. 余额及积分 (`balance.js`)](#10-余额及积分-balancejs)
+- [11. 数据库连接 (`index.js`)](#11-数据库连接-indexjs)
 
 ---
 
@@ -127,6 +129,28 @@
 | `createdAt` | `Date` | 创建时间 (自动生成) | |
 | `updatedAt` | `Date` | 更新时间 (自动生成) | |
 
-### 9. 数据库连接 (`index.js`)
+### 9. 优惠券 (`coupon.js`)
+
+`CouponModel` - 存储用户的优惠券信息。
+
+| 字段名 | 类型 | 描述 | 关联 |
+| :--- | :--- | :--- | :--- |
+| `user` | `ObjectId` | 所属用户ID | `User` |
+| `name` | `String` | 优惠券名称 | |
+| `amount` | `Number` | 优惠券金额 | |
+| `expire` | `Date` | 过期时间 | |
+| `status` | `Number` | 状态 (0:未使用, 1:已使用, 2:已过期) | |
+
+### 10. 余额及积分 (`balance.js`)
+
+`BalanceModel` - 存储用户的余额和积分信息。
+
+| 字段名 | 类型 | 描述 | 关联 |
+| :--- | :--- | :--- | :--- |
+| `user` | `ObjectId` | 所属用户ID | `User` |
+| `balance` | `Number` | 账户余额 | |
+| `points` | `Number` | 用户积分 | |
+
+### 11. 数据库连接 (`index.js`)
 
 此文件负责连接 MongoDB 数据库，并统一导出所有数据模型，方便在项目的其他地方调用。
