@@ -1,0 +1,114 @@
+.home-container {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #333;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+}
+
+.home-header {
+    background-image: url('https://via.placeholder.com/1920x600?text=Script+Kill+Background');
+    background-size: cover;
+    background-position: center;
+    padding: 100px 0;
+    color: white;
+}
+
+.home-header h1 {
+    font-size: 3px;
+    margin-bottom: 20px;
+    color: black;
+}
+
+.home-header p {
+    font-size: 1.5px;
+    margin-bottom: 40px;
+    color: black;
+}
+
+.start-game-btn {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.start-game-btn:hover {
+    background-color: #e65c00;
+}
+
+.hot-scripts {
+    padding: 50px 0;
+}
+
+.hot-scripts h2 {
+    font-size: 2rem;
+    margin-bottom: 30px;
+}
+
+.script-list {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.script-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 250px;
+}
+
+.script-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.script-card h3 {
+    font-size: 1.2rem;
+}
+
+/* 媒体查询，针对小屏幕设备（如手机）调整字体大小 */
+@media (max-width: 768px) {
+    .home-header h1 {
+        font-size: 2rem;
+    }
+
+    .home-header p {
+        font-size: 1.2rem;
+    }
+
+    .start-game-btn {
+        font-size: 1rem;
+        padding: 12px 24px;
+    }
+
+    .hot-scripts h2 {
+        font-size: 1.5rem;
+    }
+
+    .script-card h3 {
+        font-size: 1rem;
+    }
+
+    .home-header {
+        padding: 80px 0;
+    }
+
+    .hot-scripts {
+        padding: 30px 0;
+    }
+
+    .script-card {
+        width: 200px;
+        padding: 15px;
+    }
+}
