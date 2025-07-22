@@ -1,5 +1,6 @@
 import React from 'react';
 import './FundDetailRecharge.css';
+import { useNavigate } from 'react-router-dom';
 
 const rechargeList = [
   { id: 1, type: '充值', time: '2022.12.05 15:00:25', amount: 500 },
@@ -8,6 +9,13 @@ const rechargeList = [
 ];
 
 export default function FundDetailRecharge() {
+  const navigate = useNavigate();
+
+  const handleCardClick = (item) => {
+    // 跳转到详情页面，并传递相关参数
+    navigate(`/fund-detail/${item.id}`, { state: { ...item } });
+  };
+
   return (
     <div className="fund-detail-container">
       <div className="fund-detail-header">
@@ -20,11 +28,16 @@ export default function FundDetailRecharge() {
       </div>
       <div className="fund-detail-tabs">
         <span className="tab active">充值记录</span>
-        <span className="tab">扣款记录</span>
+        <span className="tab" onClick={() => navigate('/debit')}>扣款记录</span>
       </div>
       <div className="fund-detail-list">
         {rechargeList.map(item => (
-          <div className="fund-detail-card" key={item.id}>
+          <div 
+            className="fund-detail-card" 
+            key={item.id}
+            onClick={() => handleCardClick(item)}
+            style={{ cursor: 'pointer' }}
+          >
             <div className="fund-detail-type">{item.type}</div>
             <div className="fund-detail-time">{item.time}</div>
             <div className="fund-detail-amount plus">
@@ -35,4 +48,4 @@ export default function FundDetailRecharge() {
       </div>
     </div>
   );
-} 
+}
