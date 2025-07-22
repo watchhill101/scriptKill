@@ -5,28 +5,53 @@ const userSchema = new mongoose.Schema(
     name: String, //用户名
     imgUrl: String, //头像
     phone: String, //手机号
-    openId: { type: String, unique: true }, // 微信用户唯一标识
+    sex: {
+      type: Number,
+      enum:[0,1],// 0-女 1-男
+      default: 0,
+    }, //性别
+    openId: {
+      type: String,
+      unique: true,
+      default: function () {
+        // 生成类似微信 openId 格式的唯一标识
+        return (
+          "o" +
+          Date.now().toString(36) +
+          Math.random().toString(36).substr(2, 9)
+        );
+      },
+    }, // 微信用户唯一标识
     // 收藏的剧本
-    collections: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "script",
-      },
-    ],
+    collections: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "script",
+        },
+      ],
+      default: [],
+    },
     // 玩过的剧本
-    playedBefore: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "script",
-      },
-    ],
+    playedBefore: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "script",
+        },
+      ],
+      default: [],
+    },
     // 优惠券
-    coupons: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "coupon",
-      },
-    ],
+    coupons: {
+      type: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "coupon",
+        },
+      ],
+      default: [],
+    },
   },
   {
     timestamps: true,
