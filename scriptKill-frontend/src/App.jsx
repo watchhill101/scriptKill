@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Login from './pages/loginPage/login.jsx';
 import Register from './pages/loginPage/register.jsx';
-import Home from './pages/homePage/home.jsx'; // 假设首页组件路径
+import Home from './pages/loginPage/home.jsx'; // 假设首页组件路径
 
 function App() {
   return (
