@@ -13,13 +13,81 @@ const {
 } = require("../module/index");
 //获取剧本
 router.get("/script", (req, res) => {
-  ScriptModel.find().then((data) => {
-    res.json({
-      code: 200,
-      msg: "获取剧本成功",
-      data,
+  const { playerCount, difficulty, tags } = req.query;
+  
+  // 构建查询条件
+  let query = {};
+  
+  // 人数筛选 - 假设数据库中存储的是总人数字段
+  if (playerCount && playerCount.length > 0) {
+    const playerCounts = Array.isArray(playerCount) ? playerCount : [playerCount];
+    const countConditions = playerCounts.map(count => {
+      if (count === '12+') {
+        return { $expr: { $gte: [{ $add: ['$recommendNum.boyNum', '$recommendNum.grilNum'] }, 12] } };
+      } else {
+        const num = parseInt(count.replace('人', ''));
+        return { $expr: { $eq: [{ $add: ['$recommendNum.boyNum', '$recommendNum.grilNum'] }, num] } };
+      }
     });
-  });
+    query.$or = countConditions;
+  }
+  
+  // 难度筛选 - 假设数据库中有difficulty字段
+  if (difficulty && difficulty.length > 0) {
+    const difficulties = Array.isArray(difficulty) ? difficulty : [difficulty];
+    query.difficulty = { $in: difficulties };
+  }
+  
+  // 标签筛选 - 通过type字段筛选
+  if (tags && tags.length > 0) {
+    const tagArray = Array.isArray(tags) ? tags : [tags];
+    // 先查询匹配的类型ID
+    TypeModel.find({ name: { $in: tagArray } })
+      .then(types => {
+        const typeIds = types.map(type => type._id);
+        if (typeIds.length > 0) {
+          query.type = { $in: typeIds };
+        }
+        
+        return ScriptModel.find(query)
+          .populate('type', 'name')
+          .populate('role', 'name gender description imgUrl');
+      })
+      .then((data) => {
+        res.json({
+          code: 200,
+          msg: "获取剧本成功",
+          data,
+        });
+      })
+      .catch((error) => {
+        res.json({
+          code: 500,
+          msg: "获取剧本失败",
+          error: error.message,
+        });
+      });
+    return;
+  }
+  
+  // 如果没有标签筛选，直接查询
+  ScriptModel.find(query)
+    .populate('type', 'name')
+    .populate('role', 'name gender description imgUrl')
+    .then((data) => {
+      res.json({
+        code: 200,
+        msg: "获取剧本成功",
+        data,
+      });
+    })
+    .catch((error) => {
+      res.json({
+        code: 500,
+        msg: "获取剧本失败",
+        error: error.message,
+      });
+    });
 });
 //获取类型
 router.get("/type", (req, res) => {

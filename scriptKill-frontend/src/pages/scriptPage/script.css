@@ -1,0 +1,748 @@
+/* 导航栏右侧图标 */
+.nav-right-icon {
+  font-size: 24px;
+}
+
+/* 导航栏左侧搜索框容器 */
+.nav-left-search {
+  font-size: 16px;
+  display: flex;
+  width: 150%;
+  justify-content: center;
+  align-content: center;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+}
+
+/* 搜索图标 */
+.search-icon {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+/* 吸顶容器 */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 1px solid #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+/* Tabs和筛选按钮容器 */
+.tabs-filter-container {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Tabs样式 */
+.tabs-wrapper {
+  flex: 1;
+}
+
+/* 筛选按钮 */
+.filter-button {
+  border-radius: 20px;
+  border: 1px solid #d9d9d9;
+  color: #666;
+  margin-left: 16px;
+}
+
+/* 筛选图标 */
+.filter-icon {
+  margin-right: 4px;
+}
+
+/* 筛选弹窗样式 */
+.filter-popup {
+  min-height: 50vh;
+  max-width: 90vw;
+  padding: 20px;
+}
+
+/* 筛选弹窗内容容器 */
+.filter-content {
+  margin-bottom: 20px;
+}
+
+/* 筛选标题 */
+.filter-title {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* 筛选分类容器 */
+.filter-category {
+  margin-bottom: 24px;
+}
+
+/* 筛选分类标题 */
+.filter-category-title {
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+/* 筛选选项按钮容器 */
+.filter-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* 筛选选项按钮 */
+.filter-option-button {
+  border-radius: 20px;
+  min-width: 60px;
+  height: 32px;
+}
+
+/* 筛选底部按钮容器 */
+.filter-bottom-buttons {
+  display: flex;
+  gap: 12px;
+  position: sticky;
+  bottom: 0;
+  background-color: #fff;
+  padding-top: 16px;
+}
+
+/* 重置按钮 */
+.reset-button {
+  flex: 1;
+  height: 44px;
+  border-radius: 8px;
+}
+
+/* 确定按钮 */
+.confirm-button {
+  flex: 2;
+  height: 44px;
+  border-radius: 8px;
+}
+
+/* Swiper内容容器 */
+.swiper-content {
+  padding: 16px;
+}
+
+/* 剧本卡片 */
+.script-card {
+  display: flex;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 剧本封面容器 */
+.script-cover-container {
+  margin-right: 16px;
+  flex-shrink: 0;
+}
+
+/* 剧本封面图片 */
+.script-cover-image {
+  width: 120px;
+  height: 160px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* 剧本信息容器 */
+.script-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 剧本名称 */
+.script-name {
+  margin: 0 0 12px 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* 类型标签容器 */
+.script-tags-container {
+  margin-bottom: 12px;
+}
+
+/* 类型标签 */
+.script-tag {
+  display: inline-block;
+  background-color: #e6f7ff;
+  color: #1890ff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  margin-right: 8px;
+  margin-bottom: 4px;
+}
+
+/* 游戏信息容器 */
+.script-game-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* 游戏信息项 */
+.script-info-item {
+  margin-right: 16px;
+}
+
+/* 价格 */
+.script-price {
+  margin-top: auto;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ff4d4f;
+}
+/* 剧本详情页样式 */
+.script-details-container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* 详情页顶部导航 */
+.details-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.back-icon {
+  font-size: 20px;
+  color: #333;
+  cursor: pointer;
+}
+
+.details-title {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 500;
+  color: #333;
+}
+
+.header-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.action-icon {
+  font-size: 24px;
+  color: #333;
+  cursor: pointer;
+}
+
+/* 剧本基本信息区域 */
+.script-basic-info {
+  display: flex;
+  padding: 16px;
+  background-color: #fff;
+  margin-bottom: 8px;
+}
+
+.script-cover-section {
+  margin-right: 12px;
+  flex-shrink: 0;
+}
+
+.details-cover-image {
+  width: 100px;
+  height: 140px;
+  border-radius: 8px;
+  object-fit: cover;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.script-meta-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.script-title {
+  margin: 0 0 10px 0;
+  font-size: 18px;
+  font-weight: 500;
+  color: #333;
+  line-height: 1.2;
+}
+
+.script-tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.player-count-tag {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  padding: 2px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.script-detail-tag {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  padding: 2px 10px;
+  border-radius: 15px;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.script-specs {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+  margin-bottom: 16px;
+}
+
+.spec-item {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  color: #666;
+}
+
+.spec-icon {
+  margin-right: 5px;
+  font-size: 14px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.like-button {
+  background-color: #fff;
+  border: 1px solid #ff4d4f;
+  color: #ff4d4f;
+  border-radius: 20px;
+  padding: 4px 16px;
+  height: 30px;
+  font-size: 12px;
+  font-weight: 400;
+  min-width: 70px;
+}
+
+.add-button {
+  background-color: #f0f0f0;
+  border: none;
+  color: #333;
+  border-radius: 20px;
+  padding: 4px 16px;
+  height: 30px;
+  font-size: 12px;
+  font-weight: 400;
+  min-width: 70px;
+}
+
+/* 评分区域 */
+.rating-section {
+  background-color: #fff;
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.rating-overview {
+  display: flex;
+  gap: 15px;
+}
+
+.rating-score {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.score-number {
+  font-size: 36px;
+  font-weight: 600;
+  color: #333;
+  line-height: 1;
+}
+
+.rating-stars {
+  margin: 4px 0;
+}
+
+.rating-count {
+  font-size: 11px;
+  color: #999;
+}
+
+.rating-distribution {
+  flex: 1;
+}
+
+.rating-stats {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.played-count, .finished-count {
+  font-size: 12px;
+  color: #666;
+}
+
+.rating-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.rating-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rating-stars-small {
+  min-width: 60px;
+}
+
+.rating-stars-small .star-rating {
+  justify-content: flex-start;
+}
+
+.rating-stars-small .star {
+  font-size: 10px;
+}
+
+.rating-bar {
+  flex: 1;
+  height: 4px;
+  background-color: #eaeaea;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.rating-bar-fill {
+  height: 100%;
+  background-color: #ffa940;
+  transition: width 0.3s ease;
+}
+
+/* 剧本简介区域 */
+.script-description-section {
+  background-color: #fff;
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  margin: 0 0 12px 0;
+  font-size: 15px;
+  font-weight: 500;
+  color: #333;
+}
+
+.description-text {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #666;
+  margin: 0;
+}
+
+.expand-text {
+  color: #1890ff;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+/* 角色介绍区域 */
+.characters-section {
+  background-color: #fff;
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.characters-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.character-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.character-avatar {
+  width: 60px;
+  height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+  margin-bottom: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.character-name {
+  font-size: 12px;
+  color: #333;
+  font-weight: 400;
+}
+
+/* 底部标签页 */
+.bottom-tabs {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background-color: #fff;
+  border-top: 1px solid #f0f0f0;
+  justify-content: center;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  font-size: 14px;
+  color: #666;
+  cursor: pointer;
+  position: relative;
+  font-weight: 400;
+}
+
+.tab-item.active {
+  color: #1890ff;
+}
+
+.tab-item.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 2px;
+  background-color: #1890ff;
+  border-radius: 1px;
+}
+
+
+
+/* 响应式调整 */
+@media (max-width: 480px) {
+  .script-basic-info {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 16px;
+  }
+  
+  .script-cover-section {
+    margin-right: 0;
+    margin-bottom: 20px;
+    align-self: center;
+  }
+  
+  .details-cover-image {
+    width: 120px;
+    height: 160px;
+  }
+  
+  .rating-overview {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .characters-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .character-avatar {
+    width: 60px;
+    height: 80px;
+  }
+  
+  .floating-review-button {
+    bottom: 16px;
+    right: 16px;
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+}
+
+/* 星级评分组件样式 */
+.star-rating {
+  display: flex;
+  gap: 1px;
+}
+
+.star {
+  font-size: 14px;
+  color: #ddd;
+  transition: color 0.2s ease;
+}
+
+.star.filled {
+  color: #ff9800;
+}
+
+.star.empty {
+  color: #e0e0e0;
+}
+
+/* 评分区域中的星级样式调整 */
+.rating-stars .star-rating .star {
+  font-size: 14px;
+}
+
+.rating-bar-row .star-rating .star {
+  font-size: 10px;
+}
+
+.rating-stars-small .star.filled {
+  color: #ff9800;
+}
+
+.rating-stars-small .star.empty {
+  color: #e0e0e0;
+}
+
+/* 按钮样式调整 */
+.like-button, .add-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  font-size: 12px;
+}
+
+.like-button svg, .add-button svg {
+  width: 14px;
+  height: 14px;
+}
+/* 无角色信息样式 
+*/
+.no-characters {
+  grid-column: span 4;
+  text-align: center;
+  padding: 20px;
+  color: #999;
+  font-size: 14px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}/*
+ 空描述样式 */
+.empty-description {
+  color: #999;
+  font-style: italic;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+}/
+* 空标签样式 */
+.empty-tag {
+  background-color: #f0f0f0;
+  color: #999;
+}/* T
+ab content area */
+.tab-content-area {
+  background-color: #fff;
+  padding: 16px;
+  margin-top: 8px;
+  margin-bottom: 60px; /* Space for the floating button */
+  min-height: 200px;
+}/
+* Comments styles */
+.comments-container {
+  margin-bottom: 20px;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.comment-user {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.comment-date {
+  font-size: 12px;
+  color: #999;
+}
+
+.comment-content {
+  margin-top: 8px;
+}
+
+.comment-content p {
+  margin-top: 8px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* Describe styles */
+.describe-container {
+  margin-bottom: 20px;
+}
+
+.describe-container p {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+.describe-container h4 {
+  font-size: 16px;
+  font-weight: 500;
+  margin: 20px 0 10px;
+  color: #333;
+}
+
+.describe-container ul {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.describe-container li {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 8px;
+  color: #333;
+}
+
+.fixed-Bottom{
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  width: 100vw;
+  justify-content: space-between;
+  border: 0;
+}
