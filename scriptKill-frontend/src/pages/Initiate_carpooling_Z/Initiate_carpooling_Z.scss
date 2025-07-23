@@ -1,0 +1,404 @@
+.initiate-carpooling-z {
+  min-height: 100vh;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+
+  // 自定义Loading组件样式
+  .loading-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 0;
+    
+    &.small {
+      padding: 12px 0;
+      
+      .spinner-icon {
+        width: 20px;
+        height: 20px;
+        margin-bottom: 8px;
+      }
+      
+      .loading-text {
+        font-size: 13px;
+      }
+    }
+    
+    &.large {
+      padding: 40px 0;
+      
+      .spinner-icon {
+        width: 32px;
+        height: 32px;
+        margin-bottom: 12px;
+      }
+      
+      .loading-text {
+        font-size: 16px;
+      }
+    }
+    
+    .spinner-icon {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+      .spinner-dot {
+        width: 4px;
+        height: 4px;
+        background: #1677ff;
+        border-radius: 50%;
+        animation: spinner-bounce 1.4s ease-in-out infinite both;
+        
+        &:nth-child(1) {
+          animation-delay: -0.32s;
+        }
+        
+        &:nth-child(2) {
+          animation-delay: -0.16s;
+        }
+        
+        &:nth-child(3) {
+          animation-delay: 0;
+        }
+      }
+    }
+    
+    .loading-text {
+      color: #666;
+      font-weight: 500;
+    }
+  }
+  
+  // 刷新完成提示
+  .refresh-complete {
+    padding: 8px 0;
+    text-align: center;
+    color: #52c41a;
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .nav-bar {
+    background: #fff;
+    font-weight: 600;
+    font-size: 18px;
+    border-radius: 0 0 8px 8px;
+    margin-bottom: 8px;
+  }
+
+  .date-scroll {
+    background: #fff;
+    margin-bottom: 12px;
+    overflow: hidden;
+    
+    .date-container {
+      display: flex;
+      padding: 0 12px;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      
+      .date-item {
+        flex: 0 0 auto;
+        width: 60px;
+        text-align: center;
+        padding: 12px 0;
+        cursor: pointer;
+        position: relative;
+        
+        .label {
+          font-size: 14px;
+          color: #666;
+          margin-bottom: 4px;
+        }
+        
+        .date {
+          font-size: 12px;
+          color: #999;
+        }
+        
+        &.active {
+          .label, .date {
+            color: #1677ff;
+            font-weight: 600;
+          }
+        }
+        
+        .underline {
+          position: absolute;
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 20px;
+          height: 3px;
+          background: #1677ff;
+          border-radius: 1.5px;
+        }
+      }
+    }
+  }
+
+  .tabs-container {
+    background: #fff;
+    padding: 0 12px;
+    
+    .script-tabs {
+      width: 100%;
+    }
+  }
+
+  .script-list-container {
+    flex: 1;
+    overflow: hidden;
+    
+    .adm-pull-to-refresh {
+      height: 100%;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      
+      .adm-pull-to-refresh-content {
+        min-height: calc(100vh - 280px);
+      }
+      
+      // 隐藏默认下拉提示样式
+      .adm-pull-to-refresh-head {
+        padding: 8px 0;
+        text-align: center;
+        background: transparent;
+        margin: 0;
+      }
+    }
+  }
+
+  .script-list {
+    padding: 0 0 80px 0;
+    min-height: 200px;
+
+    .loading-container,
+    .empty-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 200px;
+      padding: 40px 20px;
+    }
+
+    .empty-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.5;
+    }
+
+    .empty-text {
+      color: #999;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .empty-subtitle {
+      color: #ccc;
+      font-size: 12px;
+    }
+
+    .script-item {
+      background: #fff;
+      border-radius: 12px;
+      display: flex;
+      padding: 12px;
+      margin: 0 12px 12px;
+      box-shadow: 0 2px 8px rgba(22,119,255,0.03);
+      cursor: pointer;
+      border: 2px solid transparent;
+      position: relative;
+      transition: all 0.2s ease;
+
+      &.selected {
+        border: 2px solid #1677ff;
+        box-shadow: 0 4px 16px rgba(22,119,255,0.15);
+      }
+
+      &:active {
+        transform: scale(0.99);
+      }
+
+      .cover {
+        width: 80px;
+        height: 100px;
+        border-radius: 8px;
+        object-fit: cover;
+        margin-right: 12px;
+        background: #eee;
+      }
+
+      .info {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        .title-row {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 16px;
+          font-weight: 600;
+          margin-bottom: 4px;
+
+          .name {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+
+          .score {
+            color: #ff9c19;
+            font-size: 14px;
+            font-weight: 500;
+          }
+          
+          .selected-icon {
+            margin-left: 4px;
+            flex-shrink: 0;
+          }
+        }
+
+        .tags {
+          display: flex;
+          gap: 6px;
+          margin-bottom: 4px;
+          flex-wrap: wrap;
+          
+          .tag {
+            background: #f0f2fa;
+            color: #1677ff;
+            font-size: 12px;
+            border-radius: 12px;
+            padding: 2px 10px;
+          }
+        }
+
+        .desc {
+          color: #666;
+          font-size: 13px;
+          margin-bottom: 4px;
+          
+          .divider {
+            margin: 0 6px;
+            color: #ccc;
+          }
+        }
+
+        .price {
+          color: #ff4d4f;
+          font-size: 16px;
+          font-weight: 600;
+          
+          .unit {
+            color: #999;
+            font-size: 12px;
+            margin-left: 2px;
+          }
+        }
+      }
+    }
+
+    // 加载更多提示样式
+    .load-more-tip {
+      text-align: center;
+      padding: 16px 0;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .no-more-tip {
+      text-align: center;
+      padding: 16px 0;
+      color: #ccc;
+      font-size: 12px;
+      
+      &::before,
+      &::after {
+        content: '';
+        display: inline-block;
+        width: 60px;
+        height: 1px;
+        background: #eee;
+        vertical-align: middle;
+        margin: 0 16px;
+      }
+    }
+
+    // 无限滚动样式
+    .adm-infinite-scroll {
+      .adm-infinite-scroll-content {
+        text-align: center;
+        font-size: 14px;
+        color: #999;
+        padding: 8px 0;
+      }
+    }
+  }
+
+  .footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fff;
+    border-top: 1px solid #eee;
+    padding: 12px 16px 16px 16px;
+    z-index: 10;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+    
+    .adm-button {
+      font-size: 18px;
+      height: 48px;
+      border-radius: 24px;
+    }
+  }
+
+  // Loading动画
+  @keyframes spinner-bounce {
+    0%, 80%, 100% {
+      transform: scale(0.8);
+      opacity: 0.5;
+    }
+    40% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  // 响应式优化
+  @media screen and (max-width: 375px) {
+    .script-list {
+      .script-item {
+        margin: 0 8px 8px;
+        padding: 10px;
+        
+        .cover {
+          width: 70px;
+          height: 90px;
+        }
+        
+        .info {
+          .title-row {
+            font-size: 15px;
+            
+            .score {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,5 +1,11 @@
 var express = require("express");
 var router = express.Router();
+
+
+
+const rankingRouter = require('./ranking');
+// 添加优惠券路由导入
+const couponRouter = require('./coupon');
 const {
   ShopModel, //店铺
   ScriptModel, //剧本
@@ -11,7 +17,15 @@ const {
   CouponModel, //优惠券
   BalanceModel, //余额
 } = require("../module/index");
-//获取剧本
+
+// 添加排名路由挂载
+router.use('/api/rankings', rankingRouter);
+// 在文件末尾添加优惠券路由挂载
+router.use('/api/coupons', couponRouter);
+// 挂载排名路由
+router.use('/api/rankings', rankingRouter);
+
+// 获取剧本
 router.get("/script", (req, res) => {
   const { playerCount, difficulty, tags } = req.query;
   

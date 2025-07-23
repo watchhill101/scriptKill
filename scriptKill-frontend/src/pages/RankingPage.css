@@ -1,0 +1,165 @@
+.ranking-container {
+  width: 100%;
+  max-width: 500px;
+  background-color: #f0f5ff;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  padding: 20px 15px;
+  font-family: 'Arial Rounded MT Bold', sans-serif;
+}
+
+/* 前三名容器 */
+.ranking-top-three {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 30px 0 40px;
+  position: relative;
+}
+
+/* 前三名卡片样式 */
+.top-player-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 30%;
+  background-color: white;
+  border-radius: 12px;
+  padding: 15px 10px 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* 第一名特殊样式 */
+.top-player-item:first-child {
+  order: 2;
+  margin: 0 10px;
+  padding-top: 30px;
+  border: 3px solid #FFD700;
+  transform: scale(1.1);
+}
+
+/* 第二名特殊样式 */
+.top-player-item:nth-child(2) {
+  order: 1;
+  border: 2px solid #C0C0C0;
+}
+
+/* 第三名特殊样式 */
+.top-player-item:last-child {
+  order: 3;
+  border: 2px solid #CD7F32;
+}
+
+/* 皇冠图标 */
+.top-player-item:first-child::before {
+  content: '👑';
+  position: absolute;
+  top: -20px;
+  font-size: 24px;
+}
+
+.top-player-item:nth-child(2)::before,
+.top-player-item:last-child::before {
+  content: '👑';
+  position: absolute;
+  top: -15px;
+  font-size: 18px;
+}
+
+/* 前三名头像 */
+.top-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 3px solid white;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* 普通排名列表 */
+.ranking-list {
+  margin-top: 20px;
+}
+
+/* 普通排名项 */
+.player {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  margin-bottom: 8px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* 排名数字 */
+.rank {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 12px;
+}
+
+/* 不同排名数字颜色 */
+.rank-4 { background-color: #999; color: white; }
+.rank-5 { background-color: #4CAF50; color: white; }
+.rank-6 { background-color: #2196F3; color: white; }
+/* 可根据需要添加更多排名颜色 */
+
+/* 普通用户头像 */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* 名称和分数容器 */
+.player-info {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.name {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.points {
+  font-size: 14px;
+  color: #FF5252;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.points::before {
+  content: '🔥';
+  margin-right: 5px;
+}
+
+/* 响应式调整 */
+@media (max-width: 375px) {
+  .top-player-item {
+    padding: 12px 8px 8px;
+  }
+  .top-avatar {
+    width: 50px;
+    height: 50px;
+  }
+  .name {
+    font-size: 14px;
+  }
+}
+
