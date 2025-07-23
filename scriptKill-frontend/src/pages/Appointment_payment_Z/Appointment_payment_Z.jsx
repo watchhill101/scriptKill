@@ -1,3 +1,4 @@
+// 预约支付
 import React, { useState, useEffect } from 'react';
 import {
   NavBar,
@@ -70,7 +71,7 @@ const AppointmentPaymentZ = () => {
 
   // 获取剧本和门店信息
   useEffect(() => {
-    const scriptId = location.state?.scriptId || '687e0e1cd0b7b89f7803a679'; // 实际的剧本ID
+    const scriptId = location.state?.scriptId || '6581234567890abcdef12347'; // 实际的剧本ID
     
     const fetchScriptData = async () => {
       try {

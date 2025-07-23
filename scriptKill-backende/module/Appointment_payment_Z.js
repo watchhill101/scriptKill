@@ -42,6 +42,9 @@ const ScriptSchema = new mongoose.Schema({
   shop: { type: mongoose.Schema.Types.ObjectId, ref: 'Shop', required: true },
   tags: [String],
   description: { type: String },
+  introduction: { type: String }, // 剧本详细介绍
+  score: { type: Number, default: 8.0 }, // 评分
+  level: { type: String, enum: ['入门', '进阶', '高级'], default: '进阶' }, // 难度等级
   timeSlots: [
     {
       label: String, // "00:00~05:00"

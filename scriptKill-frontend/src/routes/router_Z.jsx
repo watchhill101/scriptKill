@@ -3,7 +3,7 @@ import AppointmentPaymentZ from "../pages/Appointment_payment_Z/Appointment_paym
 import StartCarZ from "../pages/StartCar_Z/StartCar_Z";
 import CarpoolDetailsZ from "../pages/Carpool_details_Z/Carpool_details_Z";
 import CarpoolPaymentZ from "../pages/Carpool_payment_Z/Carpool_payment_Z";
-import LnitiateCarpoolingZ from "../pages/Initiate_carpooling_Z/Initiate_carpooling_Z";
+import InitiateCarpoolingZ from "../pages/Initiate_carpooling_Z/Initiate_carpooling_Z";
 
 const routes = createBrowserRouter([
     {
@@ -27,7 +27,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: "LnitiateCarpooling_Z",
-                element: <LnitiateCarpoolingZ />
+                element: <InitiateCarpoolingZ />
             }
         ]
     }

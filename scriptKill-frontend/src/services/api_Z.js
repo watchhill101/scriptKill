@@ -16,7 +16,8 @@ export const couponAPI = {
 };
 
 export const scriptAPI = {
-  getDetail: (id) => api.get(`/scripts/${id}`)
+  getDetail: (id) => api.get(`/scripts/${id}`),
+  getList: (params) => api.get('/scripts', { params }) // 新增
 };
 
 export const shopAPI = {
@@ -27,11 +28,18 @@ export const carGroupAPI = {
   // 获取发车列表
   getList: (params) => api.get('/car-groups', { params }),
   // 加入发车
-  join: (id, data) => api.post(`/car-groups/${id}/join`, data)
+  join: (id, data) => api.post(`/car-groups/${id}/join`, data),
+  // 获取发车详情
+  getDetail: (id) => api.get(`/car-groups/${id}`),
+  // 拼车支付
+  payment: (data) => api.post('/carpool-payment', data)
 };
 
 // 添加发起拼车相关的 API
 export const initiateCarAPI = {
   // 创建发车信息
-  create: (data) => api.post('/initiate-car', data)
+  create: (data) => api.post('/initiate-car', data),
+  getList: (params) => api.get('/initiate-cars', { params }),
+  // 获取发起拼车详情 (新增)
+  getDetail: (id) => api.get(`/initiate-cars/${id}`)
 };

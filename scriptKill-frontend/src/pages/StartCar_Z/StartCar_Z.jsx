@@ -1,3 +1,4 @@
+// 发车啦
 import React, { useState, useEffect } from 'react';
 import { SearchBar, Toast, Tabs, DotLoading, PullToRefresh, InfiniteScroll, SpinLoading } from 'antd-mobile';
 import { FilterOutline } from 'antd-mobile-icons';
@@ -101,14 +102,18 @@ const StartCarZ = () => {
     fetchCarGroups('latest');
   }, []);
 
-  // 跳转到拼车详情页
+  // 跳转到拼车详情页 (修改这个方法)
   const goToDetail = (carGroup) => {
-    navigate(`/ZYC/Carpool_payment_Z`, {
-      state: { carGroupId: carGroup._id }
+    // 应该跳转到拼车详情页，而不是直接跳转到支付页
+    navigate(`/ZYC/Carpool_details_Z?id=${carGroup._id}`, {
+      state: { 
+        carpoolData: carGroup,
+        source: 'group' // 标记来源是发车列表
+      }
     });
   };
 
-  // 加入发车并跳转
+  // 加入发车并跳转 (保持这个方法不变)
   const handleJoin = async (e, carGroup) => {
     // 阻止事件冒泡，避免触发卡片点击事件
     e.stopPropagation();
@@ -175,10 +180,31 @@ const StartCarZ = () => {
     fetchCarGroups(activeTab);
   };
 
+  // 计算剩余人数的性别分布
+  const calculateRemainingGender = (carGroup) => {
+    const { requirements, currentPeople } = carGroup;
+    
+    // 统计当前各性别人数
+    const currentMale = currentPeople.filter(p => p.gender === 'male').length;
+    const currentFemale = currentPeople.filter(p => p.gender === 'female').length;
+    
+    // 计算剩余需求
+    const remainingMale = Math.max(0, requirements.male - currentMale);
+    const remainingFemale = Math.max(0, requirements.female - currentFemale);
+    
+    return {
+      remainingMale,
+      remainingFemale,
+      currentMale,
+      currentFemale,
+      isFull: remainingMale === 0 && remainingFemale === 0
+    };
+  };
+
   // 修改渲染列表项方法
   const renderCarItem = (carGroup) => {
     const { script, currentPeople, maxPeople } = carGroup;
-    const remainingPeople = maxPeople - currentPeople.length;
+    const genderInfo = calculateRemainingGender(carGroup);
 
     return (
       <div 
@@ -204,9 +230,9 @@ const StartCarZ = () => {
             <div className="basic-info">
               <span>{`${carGroup.requirements.male}男${carGroup.requirements.female}女`}</span>
               <span className="divider">|</span>
-              <span>{`${script.duration}分钟`}</span>
+              <span>{`${Math.floor(script.duration / 60)}小时`}</span>
               <span className="divider">|</span>
-              <span>进阶</span>
+              <span>{script.level || '进阶'}</span>
             </div>
             <div className="price">
               ¥{script.price}<span className="unit">/人起</span>
@@ -220,24 +246,48 @@ const StartCarZ = () => {
 
         <div className="people-info">
           <div className="avatars">
-            {currentPeople.map((person, index) => (
+            {/* 最多显示4个头像 */}
+            {currentPeople.slice(0, 4).map((person, index) => (
               <img
                 key={person.user._id}
                 className="avatar"
-                src={person.user.avatar || 'https://via.placeholder.com/40'}
+                src={person.user.avatar || '/堂主.png'}
                 alt=""
               />
             ))}
+            {/* 如果超过4个人，显示省略号 */}
+            {currentPeople.length > 4 && (
+              <div className="avatar-more">
+                <span>...</span>
+              </div>
+            )}
           </div>
+          
+          {/* 优化状态显示 */}
           <div className="status">
-            已加入{currentPeople.length}人，还差{remainingPeople}人
+            {genderInfo.isFull ? (
+              <span className="full-status">已满员</span>
+            ) : (
+              <div className="remaining-info">
+                <span className="current">已加入{currentPeople.length}人</span>
+                <div className="remaining">
+                  {genderInfo.remainingMale > 0 && (
+                    <span className="male">还缺{genderInfo.remainingMale}男</span>
+                  )}
+                  {genderInfo.remainingFemale > 0 && (
+                    <span className="female">还缺{genderInfo.remainingFemale}女</span>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
+          
           <button 
             className="join-btn"
             onClick={(e) => handleJoin(e, carGroup)}
-            disabled={carGroup.status === 'full'}
+            disabled={genderInfo.isFull}
           >
-            {carGroup.status === 'full' ? '已满员' : '加入拼车'}
+            {genderInfo.isFull ? '已满员' : '加入拼车'}
           </button>
         </div>
       </div>

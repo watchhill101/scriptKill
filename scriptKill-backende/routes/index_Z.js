@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const mongoose = require('mongoose'); // 如果已有这行就不需要添加
 // 修改引用路径，分别引入两个模型文件
 const { Appointment, Coupon, Script, Shop } = require('../module/Appointment_payment_Z');
 const CarGroup = require('../module/StartCar_Z');
@@ -154,6 +155,31 @@ router.get('/shops/:id', async (req, res) => {
   }
 });
 
+// 获取发车详情 
+router.get('/car-groups/:id', async (req, res) => {
+  try {
+    const carGroup = await CarGroup.findById(req.params.id);
+    
+    if (!carGroup) {
+      return res.status(404).json({
+        code: 1,
+        msg: '发车信息不存在'
+      });
+    }
+
+    res.json({
+      code: 0,
+      data: carGroup
+    });
+  } catch (err) {
+    res.status(500).json({
+      code: 1,
+      msg: '获取发车详情失败',
+      error: err.message
+    });
+  }
+});
+
 // 获取发车列表
 router.get('/car-groups', async (req, res) => {
   try {
@@ -232,14 +258,22 @@ router.post('/car-groups/:id/join', async (req, res) => {
       });
     }
 
-    // 检查性别人数限制
-    const currentGenderCount = carGroup.currentPeople.filter(p => p.gender === gender).length;
-    const maxGenderCount = gender === 'male' ? carGroup.requirements.male : carGroup.requirements.female;
+    // 统计当前性别人数
+    const currentMaleCount = carGroup.currentPeople.filter(p => p.gender === 'male').length;
+    const currentFemaleCount = carGroup.currentPeople.filter(p => p.gender === 'female').length;
     
-    if (currentGenderCount >= maxGenderCount) {
+    // 检查性别人数限制
+    if (gender === 'male' && currentMaleCount >= carGroup.requirements.male) {
       return res.status(400).json({
         code: 1,
-        msg: `${gender === 'male' ? '男生' : '女生'}人数已满`
+        msg: '男生人数已满'
+      });
+    }
+    
+    if (gender === 'female' && currentFemaleCount >= carGroup.requirements.female) {
+      return res.status(400).json({
+        code: 1,
+        msg: '女生人数已满'
       });
     }
 
@@ -247,13 +281,21 @@ router.post('/car-groups/:id/join', async (req, res) => {
     carGroup.currentPeople.push({
       user: {
         _id: userId,
-        avatar: '/堂主.png' // 默认头像
+        avatar: '/堂主.png'
       },
       gender
     });
 
     // 增加热度
     carGroup.heat += 1;
+
+    // 检查是否满员，更新状态
+    const newMaleCount = carGroup.currentPeople.filter(p => p.gender === 'male').length;
+    const newFemaleCount = carGroup.currentPeople.filter(p => p.gender === 'female').length;
+    
+    if (newMaleCount >= carGroup.requirements.male && newFemaleCount >= carGroup.requirements.female) {
+      carGroup.status = 'full';
+    }
 
     await carGroup.save();
 
@@ -271,16 +313,99 @@ router.post('/car-groups/:id/join', async (req, res) => {
   }
 });
 
-// 创建发车
+// 获取剧本列表（用于发起拼车页面）- 优化分页逻辑
+router.get('/scripts', async (req, res) => {
+  try {
+    const { tag, page = 1, pageSize = 10 } = req.query;
+    
+    let query = {};
+    if (tag && tag !== '全部' && tag !== '') {
+      query.tags = { $in: [tag] };
+    }
+    
+    // 计算跳过的记录数
+    const skip = (parseInt(page) - 1) * parseInt(pageSize);
+    
+    // 获取总数
+    const total = await Script.countDocuments(query);
+    
+    // 获取分页数据
+    const scripts = await Script.find(query)
+      .skip(skip)
+      .limit(parseInt(pageSize))
+      .sort({ createdAt: -1 });
+    
+    // 计算是否还有更多数据
+    const hasMore = skip + scripts.length < total;
+    
+    res.json({
+      code: 0,
+      data: scripts,
+      pagination: {
+        page: parseInt(page),
+        pageSize: parseInt(pageSize),
+        total,
+        hasMore
+      }
+    });
+  } catch (err) {
+    console.error('获取剧本列表失败:', err);
+    res.status(500).json({
+      code: 1,
+      msg: '获取剧本列表失败',
+      error: err.message
+    });
+  }
+});
+
+// 优化创建发车接口
 router.post('/initiate-car', async (req, res) => {
   try {
+    const { script, date, timeSlot, maxPeople, requirements, userId } = req.body;
+    
+    // 数据验证
+    if (!script || !date || !timeSlot || !maxPeople || !requirements || !userId) {
+      return res.status(400).json({
+        code: 1,
+        msg: '缺少必要参数'
+      });
+    }
+    
+    // 验证时间格式
+    if (!timeSlot.start || !timeSlot.end) {
+      return res.status(400).json({
+        code: 1,
+        msg: '时间段格式错误'
+      });
+    }
+    
+    // 验证人数配置
+    if (requirements.male + requirements.female !== maxPeople) {
+      return res.status(400).json({
+        code: 1,
+        msg: '男女人数配置与总人数不符'
+      });
+    }
+    
     const carData = {
-      ...req.body,
-      status: 'pending',
+      script, // 包含 introduction 字段
+      date: new Date(date),
+      timeSlot,
+      maxPeople,
+      requirements,
+      currentPeople: [{
+        user: {
+          _id: userId,
+          avatar: '/堂主.png'
+        },
+        gender: 'male' // 默认创建者性别，实际应该从用户信息获取
+      }],
       creator: {
-        _id: req.body.userId,
+        _id: userId,
         avatar: '/堂主.png'
-      }
+      },
+      status: 'pending',
+      heat: 1 // 创建时默认热度为1
     };
 
     const initiateCar = new InitiateCar(carData);
@@ -292,9 +417,189 @@ router.post('/initiate-car', async (req, res) => {
       data: initiateCar
     });
   } catch (err) {
+    console.error('创建发车失败:', err);
     res.status(500).json({
       code: 1,
       msg: '发车失败',
+      error: err.message
+    });
+  }
+});
+
+// 获取发起的拼车列表
+router.get('/initiate-cars', async (req, res) => {
+  try {
+    const { userId } = req.query;
+    
+    const query = userId ? { 'creator._id': userId } : {};
+    
+    const cars = await InitiateCar.find(query)
+      .sort({ createdAt: -1 });
+    
+    res.json({
+      code: 0,
+      data: cars
+    });
+  } catch (err) {
+    res.status(500).json({
+      code: 1,
+      msg: '获取发车列表失败',
+      error: err.message
+    });
+  }
+});
+
+// 获取发起拼车详情 (新增)
+router.get('/initiate-cars/:id', async (req, res) => {
+  try {
+    const initiateCar = await InitiateCar.findById(req.params.id);
+    
+    if (!initiateCar) {
+      return res.status(404).json({
+        code: 1,
+        msg: '拼车信息不存在'
+      });
+    }
+
+    res.json({
+      code: 0,
+      data: initiateCar
+    });
+  } catch (err) {
+    res.status(500).json({
+      code: 1,
+      msg: '获取拼车详情失败',
+      error: err.message
+    });
+  }
+});
+
+// 拼车支付成功后添加到发车列表
+router.post('/carpool-payment', async (req, res) => {
+  try {
+    const { carId, peopleCount, genderAllocation, note, phone, couponId, totalAmount, userId, source } = req.body;
+
+    // 获取原始拼车数据
+    const originalCar = source === 'initiate' ? 
+      await InitiateCar.findById(carId) : 
+      await CarGroup.findById(carId);
+
+    if (!originalCar) {
+      return res.status(404).json({
+        code: 1,
+        msg: '拼车信息不存在'
+      });
+    }
+
+    // 验证性别分配
+    const currentMale = originalCar.currentPeople.filter(p => p.gender === 'male').length;
+    const currentFemale = originalCar.currentPeople.filter(p => p.gender === 'female').length;
+    const remainingMale = originalCar.requirements.male - currentMale;
+    const remainingFemale = originalCar.requirements.female - currentFemale;
+
+    if (genderAllocation.male > remainingMale || genderAllocation.female > remainingFemale) {
+      return res.status(400).json({
+        code: 1,
+        msg: '性别人数超出需求限制'
+      });
+    }
+
+    // 检查剩余位置
+    const remainingSlots = originalCar.maxPeople - originalCar.currentPeople.length;
+    if (peopleCount > remainingSlots) {
+      return res.status(400).json({
+        code: 1,
+        msg: `剩余位置不足，只能预约${remainingSlots}人`
+      });
+    }
+
+    // 创建新成员列表
+    const newMembers = [];
+    
+    // 添加男生
+    for (let i = 0; i < genderAllocation.male; i++) {
+      newMembers.push({
+        user: {
+          _id: new mongoose.Types.ObjectId(), // 使用ObjectId而不是字符串
+          avatar: '/堂主.png'
+        },
+        gender: 'male'
+      });
+    }
+    
+    // 添加女生
+    for (let i = 0; i < genderAllocation.female; i++) {
+      newMembers.push({
+        user: {
+          _id: new mongoose.Types.ObjectId(), // 使用ObjectId而不是字符串
+          avatar: '/堂主.png'
+        },
+        gender: 'female'
+      });
+    }
+
+    // 创建新的发车信息或更新现有信息
+    let carGroup;
+    if (source === 'initiate') {
+      const isCreator = originalCar.creator._id.toString() === userId;
+      
+      if (isCreator) {
+        // 创建者支付时，从购买人数中减去创建者本身
+        const adjustedMembers = newMembers.slice(0, peopleCount - 1);
+        
+        carGroup = new CarGroup({
+          script: originalCar.script,
+          date: originalCar.date,
+          timeSlot: originalCar.timeSlot,
+          maxPeople: originalCar.maxPeople,
+          requirements: originalCar.requirements,
+          currentPeople: [
+            ...originalCar.currentPeople, // 已包含创建者
+            ...adjustedMembers
+          ],
+          status: 'pending',
+          heat: (originalCar.heat || 0) + peopleCount
+        });
+      } else {
+        carGroup = new CarGroup({
+          script: originalCar.script,
+          date: originalCar.date,
+          timeSlot: originalCar.timeSlot,
+          maxPeople: originalCar.maxPeople,
+          requirements: originalCar.requirements,
+          currentPeople: [
+            ...originalCar.currentPeople,
+            ...newMembers
+          ],
+          status: 'pending',
+          heat: (originalCar.heat || 0) + peopleCount
+        });
+      }
+    } else {
+      // 更新现有发车
+      originalCar.currentPeople.push(...newMembers);
+      originalCar.heat = (originalCar.heat || 0) + peopleCount;
+      carGroup = originalCar;
+    }
+
+    await carGroup.save();
+
+    res.json({
+      code: 0,
+      msg: '支付成功',
+      data: {
+        carGroupId: carGroup._id,
+        orderId: `ORDER_${Date.now()}`,
+        amount: totalAmount,
+        genderAllocation
+      }
+    });
+
+  } catch (err) {
+    console.error('拼车支付失败:', err);
+    res.status(500).json({
+      code: 1,
+      msg: '支付失败',
       error: err.message
     });
   }

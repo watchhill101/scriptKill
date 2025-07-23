@@ -20,6 +20,7 @@
     "react-draggable": "^4.5.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^6.30.1",
+    "react-sticky-box": "^2.0.5",
     "swiper": "^8.4.7"
   },
   "devDependencies": {

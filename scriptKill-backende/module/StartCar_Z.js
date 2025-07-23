@@ -9,7 +9,8 @@ const CarGroupSchema = new mongoose.Schema({
     price: { type: Number, required: true },
     duration: { type: Number, required: true }, // 单位：分钟
     tags: [String],
-    level: { type: String, enum: ['入门', '进阶', '高级'], default: '进阶' }
+    level: { type: String, enum: ['入门', '进阶', '高级'], default: '进阶' },
+    introduction: { type: String } // 新增剧本简介字段
   },
   maxPeople: { type: Number, required: true },
   requirements: {
