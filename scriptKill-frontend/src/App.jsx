@@ -1,11 +1,10 @@
-import Home from "./pages/homePage/home";
-import Script from "./pages/scriptPage/script";
+import { RouterProvider } from "react-router-dom";
+import routes from "./routes/index_G.jsx";
 
 const App = () => {
   return (
     <>
-      
-      <Script />
+      <RouterProvider router={routes} />
     </>
   );
 };
