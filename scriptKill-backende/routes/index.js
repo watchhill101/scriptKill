@@ -22,8 +22,6 @@ const {
 router.use('/api/rankings', rankingRouter);
 // 在文件末尾添加优惠券路由挂载
 router.use('/api/coupons', couponRouter);
-// 挂载排名路由
-router.use('/api/rankings', rankingRouter);
 
 // 获取剧本
 router.get("/script", (req, res) => {

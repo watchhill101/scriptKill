@@ -1,10 +1,4 @@
-const mongoose  = require('mongoose');
-
-mongoose.connect('mongodb://localhost:27017/ScriptKill', { useNewUrlParser: true, useUnifiedTopology: true }).then(() => {
-  console.log('数据库连接成功');
-}).catch((err) => {
-  console.error('数据库连接失败', err);
-});
+const mongoose = require('mongoose');
 
 // 定义用户模型
 const UserSchema = new mongoose.Schema({
