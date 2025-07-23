@@ -6,29 +6,28 @@
   .header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 12px 16px;
-    background: #fff;
-    border-radius: 8px;
-    margin-bottom: 12px;
+    padding: 10px;
+    background-color: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    .back-icon {
+      font-size: 22px;
+      margin-right: 10px;
+      color: #333;
+      cursor: pointer;
+    }
 
     .search {
       flex: 1;
-      margin: 0 12px;
-
-      :global {
-        .adm-search-bar-input-box {
-          background: #f5f5f5;
-        }
-
-        .adm-search-bar-cancel-button {
-          color: #666;
-        }
-      }
+      --border-radius: 100px;
+      --background: #f5f5f5;
     }
 
     .filter-btn {
-      color: #666;
+      font-size: 20px;
+      margin-left: 10px;
     }
   }
 

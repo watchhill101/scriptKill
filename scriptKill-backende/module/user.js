@@ -55,10 +55,30 @@ const userSchema = new mongoose.Schema(
       ],
       default: [],
     },
+    // 余额
+    balance: {
+      type: Number,
+      default: 0.00
+    },
+    // 积分
+    points: {
+      type: Number,
+      default: 0
+    },
+    // 交易记录
+    transactions: {
+      type: Array,
+      default: []
+    },
+    // 积分记录
+    pointRecords: {
+      type: Array,
+      default: []
+    },
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 const UserModel = mongoose.model("user", userSchema, "user");

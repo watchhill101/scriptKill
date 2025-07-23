@@ -1,8 +1,11 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
+import { AuthProvider } from "../context/AuthContext";
+import ProtectedRoute from "../components/ProtectedRoute";
 
 // 首页组件
 import Home from "../pages/homePage/home";
-
+import Login from "../pages/loginPage/login";
+import Register from "../pages/loginPage/register";
 // G组 - 剧本相关页面
 import Script from "../pages/scriptPage/script";
 import Scriptdetails from "../pages/scriptPage/scriptdetails";
@@ -20,6 +23,8 @@ import FundDetailDebit from "../pages/you_X/FundDetailDebit";
 import FundDetailRecharge from "../pages/you_X/FundDetailRecharge";
 import ScriptTimeline from "../pages/you_X/ScriptTimeline";
 import ScriptTimelineDetail from "../pages/you_X/ScriptTimelineDetail";
+import RechargeRecord from "../pages/RechargeRecord";
+import PointsDetail from "../pages/PointsDetail";
 
 // Z组 - 预约和拼车相关页面
 import AppointmentPaymentZ from "../pages/Appointment_payment_Z/Appointment_payment_Z";
@@ -31,11 +36,33 @@ import InitiateCarpoolingZ from "../pages/Initiate_carpooling_Z/Initiate_carpool
 const routes = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <Navigate to="/home" replace />,
   },
   {
     path: "/home",
-    element: <Home />,
+    element: (
+      <AuthProvider>
+        <ProtectedRoute>
+          <Home />
+        </ProtectedRoute>
+      </AuthProvider>
+    ),
+  },
+  {
+    path: "/login",
+    element: (
+      <AuthProvider>
+        <Login />
+      </AuthProvider>
+    ),
+  },
+  {
+    path: "/register/:phone",
+    element: (
+      <AuthProvider>
+        <Register />
+      </AuthProvider>
+    ),
   },
   // G组路由 - 剧本相关
   {
@@ -67,7 +94,13 @@ const routes = createBrowserRouter([
   },
   {
     path: "/profile",
-    element: <ProfilePage />,
+    element: (
+      <AuthProvider>
+        <ProtectedRoute>
+          <ProfilePage />
+        </ProtectedRoute>
+      </AuthProvider>
+    ),
   },
   {
     path: "/coupon-list",
@@ -75,7 +108,14 @@ const routes = createBrowserRouter([
   },
   {
     path: "/chong",
-    element: <Chong />,
+    element: 
+    (
+      <AuthProvider>
+        <ProtectedRoute>
+          <Chong />
+        </ProtectedRoute>
+      </AuthProvider>
+    ),
   },
   {
     path: "/want-play",
@@ -100,6 +140,26 @@ const routes = createBrowserRouter([
   {
     path: "/timeline/:id",
     element: <ScriptTimelineDetail />,
+  },
+  {
+    path: "/recharge-record",
+    element: (
+      <AuthProvider>
+        <ProtectedRoute>
+          <RechargeRecord />
+        </ProtectedRoute>
+      </AuthProvider>
+    ),
+  },
+  {
+    path: "/points-detail",
+    element: (
+      <AuthProvider>
+        <ProtectedRoute>
+          <PointsDetail />
+        </ProtectedRoute>
+      </AuthProvider>
+    ),
   },
   // Z组路由 - 预约和拼车
   {

@@ -1,91 +1,171 @@
-import React, { useState, useEffect } from 'react';
-import './ProfilePage.css';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import axios from 'axios';
+import TabBar from '../components/TabBar/TabBar';
+import './ProfilePage.css';
 
 const ProfilePage = () => {
-  // 添加余额状态管理
-  const [balance, setBalance] = useState(0);
-  
-  // 从本地存储加载余额
-  useEffect(() => {
-    try {
-      const savedBalance = localStorage.getItem('userBalance');
-      if (savedBalance !== null) {
-        // 解析存储的余额值（确保是数字类型）
-        const parsedBalance = parseFloat(savedBalance);
-        setBalance(isNaN(parsedBalance) ? 0 : parsedBalance);
-      }
-    } catch (error) {
-      console.error('Failed to load balance from localStorage:', error);
-    }
-  }, []);
+  const navigate = useNavigate();
+  const { user, logout, updateUserInfo } = useAuth();
+  const [profileData, setProfileData] = useState({
+    name: "",
+    sex: 0,
+    balance: 0,
+    points: 0,
+    coupons: 0
+  });
+  const [loading, setLoading] = useState(true);
 
-  // 模拟用户数据（移除硬编码的balance属性）
-  const userData = {
-    name: '晨曦Vic',
-    avatar: 'https://i.pravatar.cc/100?img=12',
-    points: 680,
-    coupons: 0,
-    menuItems: [
-      { icon: '📅', text: '我的预约', path: '/reservations' },
-      { icon: '🎫', text: '我的优惠券', path: '/coupon-list' },
-      { icon: '💰', text: '我的资金明细', path: '/recharge' },
-      { icon: '🎮', text: '想玩的本', path: '/wishlist' },
-      { icon: '✅', text: '玩过的本', path: '/played' },
-      { icon: '⏱️', text: '时间线工具', path: '/timeline' },
-      { icon: '📞', text: '联系我们', path: '/contact' }
-    ]
+  useEffect(() => {
+    // 初始化本地状态
+    if (user) {
+      setProfileData({
+        name: user.name || "",
+        sex: user.sex || 0,
+        balance: user.balance || 0,
+        points: user.points || 0,
+        coupons: user.coupons?.length || 0
+      });
+    }
+    
+    // 从API获取用户资料
+    const fetchProfile = async () => {
+      setLoading(true);
+      if (user && user._id) {
+        try {
+          const res = await axios.get(`http://localhost:3000/users/profile/${user._id}`);
+          if (res.data.code === 200) {
+            const data = res.data.data;
+            setProfileData({
+              name: data.name || "",
+              sex: data.sex || 0,
+              balance: data.balance || 0,
+              points: data.points || 0,
+              coupons: data.coupons?.length || 0
+            });
+            
+            // 更新全局用户信息
+            updateUserInfo(data);
+          }
+        } catch (error) {
+          console.error("获取用户资料失败", error);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        setLoading(false);
+      }
+    };
+
+    fetchProfile();
+  }, [user, updateUserInfo]);
+
+  // 处理菜单项点击
+  const handleMenuClick = (path) => {
+    navigate(path);
   };
 
-  const navigate = useNavigate();
+  // 处理退出登录
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
 
   return (
     <div className="profile-container">
-      {/* 用户信息头部 */}
+      {/* 用户信息头部 - 蓝色背景 */}
       <div className="profile-header">
+        <img 
+          src={user?.imgUrl || "https://robohash.org/default.png"} 
+          alt="头像" 
+          className="avatar"
+        />
         <div className="user-info">
-          <img src={userData.avatar} alt={userData.name} className="avatar" />
-          <div className="name-section">
-            <h2 className="username">{userData.name}</h2>
-            <span className="gender">♀</span>
-          </div>
+          <div className="username">{profileData.name || "未登录用户"}</div>
+          <div className="gender-icon">{profileData.sex === 0 ? '♀' : '♂'}</div>
         </div>
-        <div className="header-actions">
-          <button className="more-btn">⋮</button>
-          <button className="settings-btn">⚙️</button>
+        <div className="settings-icon" onClick={() => handleMenuClick("/settings")}>
+          ⚙️
         </div>
       </div>
 
-      {/* 余额积分区域 - 使用状态中的balance */}
-      <div className="stats-container">
-        <div className="stat-item" onClick={() => navigate('/chong')} style={{ cursor: 'pointer' }}>
-          <div className="stat-value">{balance.toFixed(2)}</div>
-          <div className="stat-label">余额（元）</div>
+      {/* 资产信息 - 白色卡片 */}
+      <div className="asset-container">
+        <div className="asset-item">
+          <div className="asset-value">{profileData.balance?.toFixed(2) || "0.00"}</div>
+          <div className="asset-label">余额 (元)</div>
         </div>
-        <div className="stat-item">
-          <div className="stat-value">{userData.points}</div>
-          <div className="stat-label">积分</div>
+        <div className="asset-item">
+          <div className="asset-value">{profileData.points || "0"}</div>
+          <div className="asset-label">积分</div>
         </div>
-        <div className="stat-item">
-          <div className="stat-value">{userData.coupons}</div>
-          <div className="stat-label">优惠券</div>
+        <div className="asset-item">
+          <div className="asset-value">{profileData.coupons || "0"}</div>
+          <div className="asset-label">优惠券</div>
         </div>
       </div>
 
-      {/* 功能菜单列表 */}
+      {/* 菜单列表 */}
       <div className="menu-list">
-        {userData.menuItems.map((item, index) => (
-          <div 
-            key={index} 
-            className="menu-item" 
-            onClick={() => navigate(item.path)}
-          >
-            <span className="menu-icon">{item.icon}</span>
-            <span className="menu-text">{item.text}</span>
-            <span className="menu-arrow">→</span>
-          </div>
-        ))}
+        <div className="menu-item" onClick={() => handleMenuClick('/my-appointments')}>
+          <span className="menu-icon">📅</span>
+          <span className="menu-name">我的预约</span>
+          <span className="menu-arrow">→</span>
+        </div>
+        
+        <div className="menu-item" onClick={() => handleMenuClick('/coupon-list')}>
+          <span className="menu-icon">🎫</span>
+          <span className="menu-name">我的优惠券</span>
+          <span className="menu-arrow">→</span>
+        </div>
+        
+        <div className="menu-item" onClick={() => handleMenuClick('/fund-details')}>
+          <span className="menu-icon">💰</span>
+          <span className="menu-name">我的资金明细</span>
+          <span className="menu-arrow">→</span>
+        </div>
+        
+        <div className="menu-item" onClick={() => handleMenuClick('/want-play')}>
+          <span className="menu-icon">🎮</span>
+          <span className="menu-name">想玩的本</span>
+          <span className="menu-arrow">→</span>
+        </div>
+        
+        <div className="menu-item" onClick={() => handleMenuClick('/played')}>
+          <span className="menu-icon">✅</span>
+          <span className="menu-name">玩过的本</span>
+          <span className="menu-arrow">→</span>
+        </div>
+        
+        <div className="menu-item" onClick={() => handleMenuClick('/timeline')}>
+          <span className="menu-icon">⏱️</span>
+          <span className="menu-name">时间线工具</span>
+          <span className="menu-arrow">→</span>
+        </div>
+        
+        <div className="menu-item" onClick={() => handleMenuClick('/contact')}>
+          <span className="menu-icon">📞</span>
+          <span className="menu-name">联系我们</span>
+          <span className="menu-arrow">→</span>
+        </div>
+
+        {/* 新增的菜单项 */}
+        <div className="menu-item" onClick={() => handleMenuClick('/recharge-record')}>
+          <span className="menu-icon">💰</span>
+          <span className="menu-name">充值记录</span>
+          <span className="menu-arrow">→</span>
+        </div>
+
+        <div className="menu-item" onClick={() => handleMenuClick('/points-detail')}>
+          <span className="menu-icon">🏆</span>
+          <span className="menu-name">积分明细</span>
+          <span className="menu-arrow">→</span>
+        </div>
       </div>
+
+      {/* 底部导航栏 */}
+      <TabBar />
     </div>
   );
 };

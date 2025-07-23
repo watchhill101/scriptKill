@@ -1,0 +1,23 @@
+/* 在register.css中添加以下样式 */
+.gender-selection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  margin: 15px 0;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.02);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.gender-text {
+  font-size: 16px;
+  font-weight: 500;
+  min-width: 30px;
+}
+
+/* 自定义Switch组件样式 */
+.gender-switch {
+  --checked-color: #1677ff;
+}

@@ -1,7 +1,7 @@
 // 发车啦
 import React, { useState, useEffect } from 'react';
 import { SearchBar, Toast, Tabs, DotLoading, PullToRefresh, InfiniteScroll, SpinLoading } from 'antd-mobile';
-import { FilterOutline } from 'antd-mobile-icons';
+import { FilterOutline, LeftOutline } from 'antd-mobile-icons';
 import './StartCar_Z.scss';
 import { carGroupAPI } from '../../services/api_Z';
 import { useDebounce } from '../../hooks/useDebounce_Z';
@@ -294,9 +294,17 @@ const StartCarZ = () => {
     );
   };
 
+  // 添加返回首页的函数
+  const handleBackToHome = () => {
+    navigate('/home');
+  };
+
   return (
     <div className="start-car">
       <div className="header">
+        {/* 添加返回箭头 */}
+        <LeftOutline className="back-icon" onClick={handleBackToHome} />
+        
         <SearchBar
           className="search"
           placeholder="输入剧本名/DM"
