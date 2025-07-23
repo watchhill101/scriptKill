@@ -1,15 +1,19 @@
 var createError = require('http-errors');
 var express = require('express');
+var cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var cors = require('cors')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var indexZRouter = require('./routes/index_Z');
 
 var app = express();
-app.use(cors())
+
+// 添加跨域配置
+app.use(cors());
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -20,6 +24,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 修改路由配置顺序
+app.use('/index_Z', indexZRouter);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 

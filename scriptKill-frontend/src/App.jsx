@@ -1,13 +1,12 @@
-import Home from "./pages/homePage/home";
-import Script from "./pages/scriptPage/script";
+import './App.css'
 
-const App = () => {
+function App() {
+
   return (
     <>
-      
-      <Script />
-    </>
-  );
-};
 
-export default App;
+    </>
+  )
+}
+
+export default App
