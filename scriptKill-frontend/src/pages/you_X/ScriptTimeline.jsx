@@ -25,9 +25,9 @@ export default function ScriptTimeline() {
     navigate(`/timeline/${id}`);
   };
   return (
-    <div className="timeline-container">
-      <div className="timeline-header">
-        <span className="header-back">&#60;</span>
+    <div className="script-timeline-container">
+      <div className="script-timeline-header">
+        <span className="header-back" onClick={() => navigate('/profile')}>&#60;</span>
         <span className="timeline-title">剧本时间线</span>
         <div className="header-right">
           <span className="header-more">···</span>
@@ -57,4 +57,4 @@ export default function ScriptTimeline() {
       </div>
     </div>
   );
-} 
+}

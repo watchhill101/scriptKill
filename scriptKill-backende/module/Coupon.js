@@ -5,7 +5,7 @@ const CouponSchema = new mongoose.Schema({
   //用户
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: "user",
   },
   //优惠卷名称
   name: {
@@ -30,6 +30,6 @@ const CouponSchema = new mongoose.Schema({
   },
 });
 
-const CouponModel = mongoose.model("coupon", CouponSchema, "coupon");
+const CouponModel = mongoose.models.coupon || mongoose.model("coupon", CouponSchema, "coupon");
 
 module.exports = CouponModel;

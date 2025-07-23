@@ -19,7 +19,7 @@ export default function FundDetailRecharge() {
   return (
     <div className="fund-detail-container">
       <div className="fund-detail-header">
-        <span className="header-back">&#60;</span>
+        <span className="header-back" onClick={() => navigate('/profile')}>&#60;</span>
         <span className="fund-detail-title">资金明细</span>
         <div className="header-right">
           <span className="header-more">···</span>

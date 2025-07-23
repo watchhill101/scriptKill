@@ -1,5 +1,6 @@
 import React from 'react';
 import './Played.css';
+import { useNavigate } from 'react-router-dom';
 
 const scripts = [
   {
@@ -29,10 +30,11 @@ const scripts = [
 ];
 
 function Played() {
+  const navigate = useNavigate();
   return (
     <div className="script-list-container">
       <div className="script-list-header">
-        <span className="header-back">&#60;</span>
+        <span className="header-back" onClick={() => navigate('/profile')}>&#60;</span>
         <span className="script-list-title">玩过的本</span>
         <div className="header-right">
           <span className="header-more">···</span>
@@ -62,4 +64,4 @@ function Played() {
   );
 }
 
-export default Played; 
+export default Played;

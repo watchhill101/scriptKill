@@ -8,7 +8,7 @@ const RankingPage = () => {
   useEffect(() => {
     const fetchRankings = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/rankings');
+        const res = await fetch('http://localhost:3000/api/rankings'); // 将5000改为3000
         const data = await res.json();
         setTopThree(data.slice(0, 3));
         setOtherPlayers(data.slice(3));

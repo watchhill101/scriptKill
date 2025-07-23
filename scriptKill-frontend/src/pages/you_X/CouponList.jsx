@@ -1,6 +1,7 @@
 import React, { useState,useEffect } from 'react';
 import './CouponList.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 // const coupons = [
 //   {
@@ -36,9 +37,10 @@ import axios from 'axios';
 // };
 
 function CouponList() {
+  const navigate = useNavigate();
   const [coupons, setCoupons] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:3000/coupon')
+    axios.get('http://localhost:3000/api/coupons')
       .then(res => {
         setCoupons([...res.data.data]);
       });
@@ -49,7 +51,7 @@ function CouponList() {
   return (
     <div className="coupon-list-container">
       <div className="coupon-list-header">
-        <span className="header-back">&#60;</span>
+        <span className="header-back" onClick={() => navigate('/profile')}>&#60;</span>
         <span className="coupon-list-title">我的优惠券</span>
         <span className="header-more">···</span>
         <span className="header-o">◎</span>
@@ -89,4 +91,4 @@ function CouponList() {
   );
 }
 
-export default CouponList; 
+export default CouponList;
