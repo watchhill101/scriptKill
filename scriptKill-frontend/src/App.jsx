@@ -1,12 +1,11 @@
-import { RouterProvider } from "react-router-dom";
-import routes from "./routes/index_G.jsx";
+import Home from "./pages/homePage/home";
 
-const App = () => {
+function App() {
   return (
     <>
-      <RouterProvider router={routes} />
+      <Home />
     </>
   );
-};
+}
 
 export default App;
