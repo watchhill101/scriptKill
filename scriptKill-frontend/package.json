@@ -20,7 +20,10 @@
     "autoprefixer": "^10.4.21",
     "axios": "^1.10.0",
     "dayjs": "^1.11.13",
+<<<<<<< Updated upstream
     "postcss": "^8.5.6",
+=======
+>>>>>>> Stashed changes
     "postcss-import": "^16.1.1",
     "postcss-pxtorem": "^6.1.0",
     "react": "^18.3.1",
@@ -34,7 +37,10 @@
     "sass": "^1.89.2",
     "styled-components": "^6.1.19",
     "swiper": "^8.4.7",
+<<<<<<< Updated upstream
     "tailwindcss": "^4.1.11",
+=======
+>>>>>>> Stashed changes
     "tsparticles": "^3.8.1"
   },
   "devDependencies": {

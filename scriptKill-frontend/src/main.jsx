@@ -4,6 +4,7 @@ import { createRoot } from "react-dom/client";
 import "./styles/index.css"; 
 // 然后导入其他组件
 import App from "./App.jsx";
+import 'autoprefixer'
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>

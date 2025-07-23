@@ -11,7 +11,11 @@ const connectDB = require('./config/db');
 // 导入路由
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+<<<<<<< Updated upstream
 const indexZRouter = require('./routes/index_Z'); // 添加Z组API路由
+=======
+const indexZRouter = require('./routes/indexZ');
+>>>>>>> Stashed changes
 
 const app = express();
 
@@ -35,7 +39,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // 路由
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+<<<<<<< Updated upstream
 app.use('/api/z', indexZRouter); // 挂载Z组API路由
+=======
+app.use('/index_Z', indexZRouter);
+>>>>>>> Stashed changes
 
 // 捕获 404 并转发到错误处理器
 app.use(function(req, res, next) {

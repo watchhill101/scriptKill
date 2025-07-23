@@ -5,6 +5,11 @@ import { Toast } from 'antd-mobile';
 import { LeftOutline } from 'antd-mobile-icons';
 import { rechargeBalance } from '../services/walletService';
 import './Chong_J.css';
+<<<<<<< Updated upstream
+=======
+import { LeftOutline } from 'antd-mobile-icons';
+
+>>>>>>> Stashed changes
 
 const RechargePage = () => {
   const navigate = useNavigate();
