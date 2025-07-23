@@ -1,0 +1,91 @@
+.modal-mask {
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5); /* 加深遮罩层透明度 */
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #fff;
+  border-radius: 12px; /* 调整圆角大小 */
+  width: 90vw;
+  max-width: 400px; /* 优化最大宽度 */
+  padding: 20px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.modal-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px; /* 增加标题栏底部间距 */
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0; /* 添加底部边框 */
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.modal-close {
+  font-size: 20px;
+  cursor: pointer;
+  color: #999;
+}
+
+.modal-form {
+  margin-bottom: 24px;
+}
+
+.modal-form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px; /* 增加行间距 */
+}
+
+.modal-form-row span {
+  width: 70px;
+  color: #666; /* 调整标签颜色 */
+  font-size: 14px;
+}
+
+/* 统一输入框样式 */
+.form-input {
+  flex: 1;
+  padding: 10px 12px;
+  border-radius: 6px; /* 减小圆角 */
+  border: 1px solid #ddd;
+  font-size: 14px;
+  margin-left: 8px;
+  height: 40px; /* 统一高度 */
+}
+
+.modal-form-desc {
+  width: 100%;
+  min-height: 100px; /* 调整文本域高度 */
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  padding: 12px;
+  font-size: 14px;
+  margin-top: 10px;
+  resize: none;
+  box-sizing: border-box; /* 确保padding不会增加宽度 */
+}
+
+.modal-confirm-btn {
+  width: 100%;
+  background: #1890ff;
+  color: #fff;
+  border: none;
+  border-radius: 6px; /* 调整按钮圆角 */
+  padding: 12px 0;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 10px;
+}

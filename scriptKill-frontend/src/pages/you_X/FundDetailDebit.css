@@ -1,0 +1,101 @@
+.fund-detail-container {
+  background: #fafbfc;
+  min-height: 100vh;
+  font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+}
+
+.fund-detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0 18px;
+  position: relative;
+}
+.header-back {
+  font-size: 22px;
+  cursor: pointer;
+  flex: 0 0 24px;
+}
+.fund-detail-title {
+  flex: 1;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #222;
+  letter-spacing: 1px;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.header-more {
+  font-size: 22px;
+  cursor: pointer;
+}
+.header-o {
+  font-size: 20px;
+  margin-left: 2px;
+  cursor: pointer;
+}
+
+.fund-detail-tabs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 17px;
+  font-weight: 500;
+}
+.tab {
+  padding: 14px 24px 10px 24px;
+  color: #888;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border 0.2s;
+}
+.tab.active {
+  color: #3b8cff;
+  border-bottom: 2px solid #3b8cff;
+  font-weight: bold;
+}
+
+.fund-detail-list {
+  padding: 18px 12px;
+}
+
+.fund-detail-card {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  margin-bottom: 18px;
+  padding: 18px 18px 14px 18px;
+  position: relative;
+}
+.fund-detail-type {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.fund-detail-time {
+  font-size: 13px;
+  color: #888;
+  margin-bottom: 4px;
+}
+.fund-detail-amount {
+  position: absolute;
+  right: 18px;
+  top: 22px;
+  font-size: 22px;
+  font-weight: bold;
+}
+.fund-detail-amount.minus {
+  color: #ff4d4f;
+}
+.fund-detail-amount.plus {
+  color: #ff4d4f;
+} 

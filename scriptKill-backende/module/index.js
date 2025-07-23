@@ -7,8 +7,10 @@ const { TypeModel } = require("./type");
 const { ReservationModel } = require("./reservation");
 const { ScriptRoleModel } = require("./scriptRole");
 const { PersonalCenterModel } = require("./personalCenter");
-const { CouponModel } = require("./Coupon");
+const { CouponModel} = require('./coupon');
+
 const { BalanceModel } = require("./balance");
+
 
 db.connect("mongodb://127.0.0.1:27017/scriptKill")
   .then(() => {
@@ -22,7 +24,7 @@ module.exports = {
   UserModel,
   ShopModel,
   ScriptModel,
-  DmModel,
+  DmModel,  
   TypeModel,
   ReservationModel,
   ScriptRoleModel,
