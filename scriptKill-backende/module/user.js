@@ -3,11 +3,14 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema(
   {
     name: String, //用户名
-    imgUrl: String, //头像
+    imgUrl: {
+      type: String,
+      default: "https://robohash.org/default.png",
+    }, //头像
     phone: String, //手机号
     sex: {
       type: Number,
-      enum:[0,1],// 0-女 1-男
+      enum: [0, 1], // 0-女 1-男
       default: 0,
     }, //性别
     openId: {

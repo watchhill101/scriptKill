@@ -1,117 +1,320 @@
-/* ... 已有代码 ... */
-
-/* 设置 html 和 body 的高度为 100% */
-/* ... 已有代码 ... */
-
-/* 添加 home- 前缀 */
-.home-home-container {
-  min-height: 100vh;
-  box-sizing: border-box;
-}
-
-.home-show-stores-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 20px;
-  width: 40px;
-  height: 40px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* ... 已有代码 ... */
-html, body {
-  height: 100%;
-  margin: 0; /* 移除默认的外边距 */
-  padding: 0; /* 移除默认的内边距 */
-}
-
-/* 设置 .home-container 的高度为 100% */
 .home-container {
-  min-height: 100vh; /* 使用视口高度单位，确保容器至少占满视口 */
-  box-sizing: border-box; /* 包含内边距和边框在高度计算内 */
-}
-.show-stores-btn {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px; /* 调整内边距适应图标 */
-  font-size: 1.2rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 20px;
-  width: 40px; /* 设置固定宽度 */
-  height: 40px; /* 设置固定高度 */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: #f5f5f5;
+  min-height: 100vh;
+  padding: 0;
+  margin: 0;
 }
 
-.show-stores-btn:hover {
-  background-color: #0056b3;
+/* 轮播图区域 */
+.carousel-section {
+  position: relative;
+  height: 200px;
+  border-radius: 0 0 20px 20px;
+  overflow: hidden;
 }
 
-.modal-overlay {
-  position: fixed;
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-slide {
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
   display: flex;
-  justify-content: center;
   align-items: center;
-  z-index: 1000;
+  justify-content: center;
 }
 
-.modal-content {
-  background-color: white;
-  border-radius: 10px;
-  padding: 20px;
-  max-width: 500px;
-  width: 90%;
+.carousel-slide.active {
+  opacity: 1;
+}
+
+.carousel-content {
   position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.modal-close-btn {
+.store-logo {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #333;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 18px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+
+.carousel-decorations {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.decoration-circle {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.decoration-circle.red {
+  width: 80px;
+  height: 80px;
+  background-color: #ff4444;
+  top: 60px;
+  left: 50px;
+  opacity: 0.8;
+}
+
+.decoration-circle.dark {
+  width: 60px;
+  height: 60px;
+  background-color: #333;
+  top: 40px;
+  right: 60px;
+  opacity: 0.7;
+}
+
+/* 轮播图指示器 */
+.carousel-indicators {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
   border: none;
-  font-size: 24px;
+  background-color: rgba(255, 255, 255, 0.5);
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-.modal-content h2 {
-  font-size: 2rem;
-  margin-bottom: 30px;
-  text-align: center;
+.indicator.active {
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
-.store-list {
-  list-style-type: none;
-  padding: 0;
+.indicator:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+/* 用户信息区域 */
+.user-info-section {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background-color: white;
+  margin: 20px;
+  border-radius: 15px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-avatar {
+  margin-right: 15px;
+}
+
+.user-avatar img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.user-details {
+  flex: 1;
+}
+
+.user-name-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.user-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  margin-right: 10px;
+}
+
+.vip-badge {
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.user-balance {
+  color: #666;
+  font-size: 14px;
+}
+
+.user-points {
+  color: #333;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* 充值活动横幅 */
+.recharge-banner {
+  margin: 20px;
+  border-radius: 15px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: hidden;
+}
+
+.banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="3" fill="%23ff6b6b" opacity="0.7"/><circle cx="80" cy="30" r="2" fill="%23feca57" opacity="0.8"/><circle cx="60" cy="70" r="4" fill="%2348dbfb" opacity="0.6"/></svg>');
+}
+
+.banner-text {
   display: flex;
   flex-direction: column;
+  color: white;
+}
+
+.banner-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.banner-subtitle {
+  font-size: 14px;
+  opacity: 0.9;
+}
+
+.banner-button {
+  background-color: #FFD700;
+  color: #333;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
 }
 
-.store-list li {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+/* 功能按钮区域 */
+.function-buttons {
+  padding: 0 20px 20px;
+}
+
+.button-row {
+  display: flex;
+  gap: 15px;
+  height: 200px;
+}
+
+.function-button {
+  border-radius: 15px;
   padding: 20px;
-  width: 300px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
 }
 
+.function-button:hover {
+  transform: translateY(-2px);
+}
+
+.large-button {
+  flex: 1;
+  height: 100%;
+}
+
+.button-column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  flex: 1;
+}
+
+.small-button {
+  flex: 1;
+}
+
+.orange-button {
+  background: linear-gradient(135deg, #ff9a56 0%, #ff6b35 100%);
+}
+
+.green-button {
+  background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+}
+
+.blue-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.button-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.button-subtitle {
+  font-size: 14px;
+  opacity: 0.9;
+  line-height: 1.3;
+}
+
+/* 响应式设计 */
+@media (max-width: 480px) {
+  .user-info-section {
+    margin: 15px;
+    padding: 15px;
+  }
+  
+  .recharge-banner {
+    margin: 15px;
+  }
+  
+  .function-buttons {
+    padding: 0 15px 15px;
+  }
+  
+  .button-row {
+    flex-direction: column;
+    height: auto;
+  }
+  
+  .button-column {
+    flex-direction: row;
+  }
+  
+  .large-button {
+    height: 120px;
+  }
+  
+  .small-button {
+    height: 100px;
+  }
+}

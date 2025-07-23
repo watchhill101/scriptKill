@@ -122,6 +122,7 @@ const StyledWrapper = styled.div`
     box-sizing: content-box;
     transition: all 0.3s ease-in-out;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
   }
   .toggle-label::before {
     content: "";
