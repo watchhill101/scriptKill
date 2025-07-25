@@ -24,7 +24,7 @@ const Script = () => {
   const left = (
     <div className="nav-left-search">
       <SearchOutline className="search-icon" />
-      <Input placeholder="输入剧本名/DM名" clearable />
+      <Input placeholder="输入剧本名/DM名" clearable style={{"width":"230px"}} />
     </div>
   );
   const tabItems = [

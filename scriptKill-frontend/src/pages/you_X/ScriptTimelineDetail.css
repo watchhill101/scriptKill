@@ -1,0 +1,140 @@
+.timeline-detail-container {
+  background: linear-gradient(135deg, #eaf4ff 0%, #b3d8ff 100%);
+  min-height: 100vh;
+  font-family: 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
+}
+.timeline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 56px;
+  background: #fff;
+  border-bottom: 1px solid #f0f0f0;
+  padding: 0 18px;
+  position: relative;
+}
+.header-back {
+  font-size: 22px;
+  cursor: pointer;
+  flex: 0 0 24px;
+}
+.timeline-title {
+  flex: 1;
+  text-align: center;
+  font-size: 22px;
+  font-weight: bold;
+  color: #222;
+  letter-spacing: 1px;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.header-more {
+  font-size: 22px;
+  cursor: pointer;
+}
+.header-o {
+  font-size: 20px;
+  margin-left: 2px;
+  cursor: pointer;
+}
+.timeline-card {
+  display: flex;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  margin: 24px 18px 0 18px;
+  padding: 18px 18px 18px 18px;
+  align-items: flex-start;
+}
+.timeline-img {
+  width: 90px;
+  height: 120px;
+  border-radius: 8px;
+  object-fit: cover;
+  margin-right: 16px;
+}
+.timeline-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.timeline-title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.timeline-script-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #222;
+}
+.timeline-score {
+  font-size: 15px;
+  color: #ff7e3e;
+  font-weight: bold;
+  margin-left: 4px;
+}
+.timeline-desc {
+  font-size: 13px;
+  color: #888;
+  line-height: 1.5;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-bottom: 12px;
+}
+.timeline-record-btn {
+  background: #fff;
+  color: #1890ff;
+  border: 1px solid #1890ff;
+  border-radius: 18px;
+  padding: 6px 22px;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  margin-top: 8px;
+}
+.timeline-record-btn:hover {
+  background: #1890ff;
+  color: #fff;
+}
+.timeline-events {
+  margin: 24px 18px 0 18px;
+}
+.timeline-event {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 24px;
+}
+.timeline-event-dot {
+  width: 12px;
+  height: 12px;
+  background: #3b8cff;
+  border-radius: 50%;
+  margin-right: 16px;
+  margin-top: 8px;
+}
+.timeline-event-info {
+  flex: 1;
+}
+.timeline-event-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  color: #222;
+  margin-bottom: 6px;
+}
+.timeline-event-desc {
+  background: #f6f8fa;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 15px;
+  color: #444;
+} 

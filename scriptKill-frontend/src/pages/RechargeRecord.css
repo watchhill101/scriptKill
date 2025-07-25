@@ -1,0 +1,93 @@
+.record-container {
+  background-color: #f5f5f5;
+  min-height: 100vh;
+}
+
+.record-header {
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.back-button {
+  margin-right: 15px;
+  font-size: 20px;
+}
+
+.record-header h1 {
+  font-size: 18px;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.record-list {
+  padding: 15px;
+}
+
+.record-item {
+  background-color: white;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.record-info {
+  flex: 1;
+}
+
+.record-title {
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+.record-date {
+  font-size: 12px;
+  color: #999;
+}
+
+.record-amount {
+  text-align: right;
+}
+
+.amount-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ff6b00;
+  margin-bottom: 5px;
+}
+
+.points-value {
+  font-size: 12px;
+  color: #52c41a;
+}
+
+.loading {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+}
+
+.empty-record {
+  text-align: center;
+  padding: 40px 0;
+  color: #999;
+}
+
+.empty-icon {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+.empty-text {
+  font-size: 14px;
+}

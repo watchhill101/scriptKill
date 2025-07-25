@@ -288,7 +288,7 @@ const Scriptdetails = () => {
           {scriptData.characters.map((character, index) => (
             <div key={index} className="character-card">
               <img
-                src={character.avatar}
+                src={`/public/2.jpeg`}
                 alt={character.name}
                 className="character-avatar"
               />
@@ -450,6 +450,25 @@ const Scriptdetails = () => {
                 fontWeight: "normal",
                 marginTop: "auto",
               }}
+              onClick={() => {
+                // 获取用户选择的日期
+                const selectedDate = getWeekDates(currentWeek)[selectedDay].date;
+                
+                // 导航到预约支付页面并传递数据
+                navigate('/appointment-payment', {
+                  state: {
+                    scriptId: scriptId,
+                    selectedDate: selectedDate,
+                    selectedDay: selectedDay,
+                    weekDay: getWeekDates(currentWeek)[selectedDay].dayName,
+                    formattedDate: getWeekDates(currentWeek)[selectedDay].formattedDate,
+                    // 其他可能需要的数据
+                  }
+                });
+                
+                // 关闭当前弹窗
+                setVisible7(false);
+              }}
             >
               下一步
             </Button>
@@ -457,8 +476,7 @@ const Scriptdetails = () => {
         </Popup>
       </div>
       <div className="fixed-Bottom">
-        <SendOutline />
-        <div style={{ width: "80%" }}>
+        <div style={{ width: "80%", margin: "0 auto" }}>
           <Button
             block
             shape="rounded"
